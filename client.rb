@@ -8,12 +8,13 @@ res = Net::HTTP.post_form(uri, params)
 
 def gen(last)
 	if last > 4
-		last - rand( Math.exp( last / 10 ) )
+		last - rand * Math.exp( last / 10 )
 	else
-		last + rand( Math.exp( last / 10 ) )
+		last + rand * Math.exp( last / 10 )
 	end
 end
 last = 17
+
 while true
 	params[:num] = gen(last)
 	uri = URI.parse(addr + "/attend")
@@ -31,6 +32,4 @@ while true
 	res = Net::HTTP.get(uri) 
 	str = res.split(/\n/)
 	last = str[0].to_f
-	puts last
-
 end
